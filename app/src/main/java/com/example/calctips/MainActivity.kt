@@ -37,10 +37,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 
 // Для формы
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.RectangleShape
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,17 +65,19 @@ class MainActivity : ComponentActivity() {
 fun MainFunc(modifier: Modifier = Modifier) {
     var message1 by remember { mutableStateOf("5") }
     var message2 by remember { mutableStateOf("3") }
-
-    Column(modifier = modifier) {
-        Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.padding(bottom = 16.dp)) {
+    var textSize=14.sp
+    Column(modifier = modifier.fillMaxSize()) {
+        Row(horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(all = 20.dp).height(32.dp)) {
             Text(
                 text = "Сумма заказа:",
-                fontSize = 28.sp,
+                fontSize = textSize,
                 modifier = Modifier
             )
             TextField(
                 value = message1,
-                textStyle = TextStyle(fontSize = 25.sp),
+                textStyle = TextStyle(fontSize = textSize),
                 onValueChange = { newText -> message1 = newText },
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(155, 192, 203),    // фон в фокусе
@@ -83,19 +88,20 @@ fun MainFunc(modifier: Modifier = Modifier) {
                     // focusedIndicatorColor = Color,    // цвет индикатора в фокусе
                     // unfocusedIndicatorColor = Color   // цвет индикатора без фокуса
                 ),
-                modifier = Modifier.background(Color(255, 192, 203))
+                modifier = Modifier.padding(start = 16.dp)
             )
         }
 
-        Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.padding(bottom = 16.dp)) {
+        Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically,modifier = Modifier.padding(all = 20.dp).fillMaxWidth(0.75f)) {
             Text(
                 text = "Количество блюд:",
-                fontSize = 28.sp,
-                modifier = Modifier.weight(1f)
+                fontSize = textSize,
+                softWrap = false,
+                modifier = Modifier
             )
             TextField(
                 value = message2,
-                textStyle = TextStyle(fontSize = 25.sp),
+                textStyle = TextStyle(fontSize = textSize),
                 onValueChange = { newText -> message2 = newText },
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFAEDBFF),    // фон в фокусе
@@ -106,7 +112,7 @@ fun MainFunc(modifier: Modifier = Modifier) {
                    // focusedIndicatorColor = Color,    // цвет индикатора в фокусе
                    // unfocusedIndicatorColor = Color   // цвет индикатора без фокуса
                 ),
-                modifier = Modifier.background(Color(255, 192, 203))
+                modifier = Modifier.padding(start = 16.dp)
             )
         }
     }
