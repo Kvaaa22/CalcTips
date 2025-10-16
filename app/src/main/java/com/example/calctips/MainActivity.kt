@@ -76,8 +76,8 @@ fun MainFunc(modifier: Modifier = Modifier) {
                 modifier = Modifier
             )
             BasicTextField(
-                value = message2,
-                onValueChange = { message2 = it },
+                value = message1,
+                onValueChange = { message1 = it },
                 textStyle = TextStyle(
                     fontSize = textSize,
                     color = Color.Black
@@ -85,12 +85,13 @@ fun MainFunc(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(start = 10.dp)
                     .width(130.dp)
                     .height(28.dp)
-                    .background(Color(0xFFFFE4EC), RoundedCornerShape(0)) // Розовый фон с закруглениями
+                    .background(Color(0xFFFFE4EC), RoundedCornerShape(0))
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .padding(horizontal = 8.dp)
 
             )
         }
 
-        // Второй ряд - Количество блюд
         Row(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
@@ -100,7 +101,7 @@ fun MainFunc(modifier: Modifier = Modifier) {
                 text = "Количество блюд:",
                 fontSize = textSize,
                 modifier = Modifier.padding(start = 10.dp)
-                // Такая же ширина для выравнивания
+
             )
             BasicTextField(
                 value = message2,
@@ -109,10 +110,13 @@ fun MainFunc(modifier: Modifier = Modifier) {
                     fontSize = textSize,
                     color = Color.Black
                 ),
-                modifier = Modifier.padding(start = 10.dp)
+                modifier = Modifier
+                    .padding(start = 10.dp)
                     .width(60.dp)
                     .height(28.dp)
-                    .background(Color(0xFFFFE4EC), RoundedCornerShape(0)) // Розовый фон с закруглениями
+                    .background(Color(0xFFFFE4EC), RoundedCornerShape(0))
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .padding(horizontal = 8.dp)
 
             )
         }
