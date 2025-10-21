@@ -8,7 +8,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -65,7 +64,7 @@ fun MainFunc(modifier: Modifier = Modifier) {
             in 1..2 -> 3
             in 3..5 -> 5
             in 6..10 -> 7
-            else -> 10 // более 10 блюд
+            else -> 10
         }
     }
 
@@ -74,7 +73,7 @@ fun MainFunc(modifier: Modifier = Modifier) {
     } catch (e: NumberFormatException) {
         0
     }
-    
+
     val discountPercentage = calculateDiscount(dishesCount)
 
     Column(
