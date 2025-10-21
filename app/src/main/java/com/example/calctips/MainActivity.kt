@@ -31,12 +31,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import com.example.calctips.ui.theme.CalcTipsTheme
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.input.VisualTransformation
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,18 +54,36 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainFunc(modifier: Modifier = Modifier) {
-    var message1 by remember { mutableStateOf("57кКС77") }
+    var message1 by remember { mutableStateOf("15000") }
     var message2 by remember { mutableStateOf("3") }
     var tipPercentage by remember { mutableStateOf(10f) }
     val textSize = 14.sp
+    val discountOptions = listOf(3, 5, 7, 10)
+
+    fun calculateDiscount(dishesCount: Int): Int {
+        return when (dishesCount) {
+            in 1..2 -> 3
+            in 3..5 -> 5
+            in 6..10 -> 7
+            else -> 10 // более 10 блюд
+        }
+    }
+
+    val dishesCount = try {
+        message2.toInt()
+    } catch (e: NumberFormatException) {
+        0
+    }
+    
+    val discountPercentage = calculateDiscount(dishesCount)
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(13.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Первый ряд - Сумма заказа
+
         Row(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
@@ -146,7 +162,6 @@ fun MainFunc(modifier: Modifier = Modifier) {
             value = tipPercentage,
             onValueChange = { tipPercentage = it },
             valueRange = 0f..25f,
-            steps = 26,
             modifier = Modifier.fillMaxWidth()
         )
         Row(
@@ -165,6 +180,36 @@ fun MainFunc(modifier: Modifier = Modifier) {
                 fontSize = 18.sp,
                 modifier = Modifier
             )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Скидка:",
+                fontSize = 18.sp,
+                modifier = Modifier.padding(end=8.dp)
+            )
+            discountOptions.forEach { discount ->
+                    Column(
+                        modifier = modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        RadioButton(
+                            selected = discountPercentage == discount,
+                            onClick = {}
+                        )
+                        Text(
+                            text = "$discount%",
+                            fontSize = 18.sp,
+                            modifier = Modifier.padding(start = 4.dp)
+                        )
+                    }
+            }
+
+
         }
 
     }
