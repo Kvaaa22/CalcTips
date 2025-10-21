@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import com.example.calctips.ui.theme.CalcTipsTheme
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
@@ -56,6 +58,7 @@ class MainActivity : ComponentActivity() {
 fun MainFunc(modifier: Modifier = Modifier) {
     var message1 by remember { mutableStateOf("57кКС77") }
     var message2 by remember { mutableStateOf("3") }
+    var tipPercentage by remember { mutableStateOf(10f) }
     val textSize = 14.sp
 
     Column(
@@ -120,6 +123,50 @@ fun MainFunc(modifier: Modifier = Modifier) {
 
             )
         }
+
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Чаевые:",
+                fontSize = textSize,
+                modifier = Modifier.padding(end=10.dp)
+            )
+
+            Text(
+                text = "${tipPercentage.toInt()}%",
+                fontSize = textSize,
+                modifier = Modifier.width(40.dp)
+            )
+        }
+
+        Slider(
+            value = tipPercentage,
+            onValueChange = { tipPercentage = it },
+            valueRange = 0f..25f,
+            steps = 26,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "0",
+                fontSize = 18.sp,
+                modifier = Modifier.padding(end=10.dp)
+            )
+
+            Text(
+                text = "25",
+                fontSize = 18.sp,
+                modifier = Modifier
+            )
+        }
+
     }
 }
 
